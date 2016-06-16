@@ -99,18 +99,17 @@ WirelessMatcher::~WirelessMatcher() {
 QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     QVector<Keygen *> * keygens = new QVector<Keygen*>;
 
-        QVector<AliceMagicInfo *> * supported = supportedAlice->value(
-                ssid.mid(6,3));
-        if (supported != NULL && supported->size() > 0) {
-            QString macProcessed = mac.replace(":", "").replace("-", "").toUpper();
-            if (macProcessed.length() < 6 || macProcessed.left(6) != supported->at(0)->mac) {
-                macProcessed = supported->at(0)->mac;
-            } else {
-                macProcessed = mac;
-            }
-            keygens->append(new AliceItalyKeygen(ssid, macProcessed, supported));
+    QVector<AliceMagicInfo *> * supported = supportedAlice->value(
+            ssid.mid(6,3));
+    if (supported != NULL && supported->size() > 0) {
+        QString macProcessed = mac.replace(":", "").replace("-", "").toUpper();
+        if (macProcessed.length() < 6 || macProcessed.left(6) != supported->at(0)->mac) {
+            macProcessed = supported->at(0)->mac;
+        } else {
+            macProcessed = mac;
         }
-
+        keygens->append(new AliceItalyKeygen(ssid, macProcessed, supported));
+    }
 
     keygens->append(new AliceGermanyKeygen(ssid, mac));
     keygens->append(new AndaredKeygen(ssid, mac));
@@ -131,59 +130,38 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     keygens->append(new OnoKeygen(ssid, mac));
     keygens->append(new OteBAUDKeygen(ssid, mac));
     keygens->append(new OteKeygen(ssid, mac));
-
-    if (ssid.toUpper().startsWith("OTE") && (mac.startsWith("E8:39:DF:F5")
-        || mac.startsWith("E8:39:DF:F6") || mac.startsWith("E8:39:DF:FD"))) {
-        QString filteredMac = mac.replace(":", "");
-        int target = filteredMac.mid(8).toInt(NULL, 16);
-        if (filteredMac.length() == 12
-            && target > (OteHuaweiKeygen::MAGIC_NUMBER - supportedOTE->length()))
-            keygens->append(new OteHuaweiKeygen(ssid, mac,
-                                       supportedOTE->at(OteHuaweiKeygen::MAGIC_NUMBER - target)));
-    }
+    QString filteredMac = mac.replace(":", "");
+    int target = filteredMac.mid(8).toInt(NULL, 16);
+    if (filteredMac.length() == 12
+        && target > (OteHuaweiKeygen::MAGIC_NUMBER - supportedOTE->length()))
+        keygens->append(new OteHuaweiKeygen(ssid, mac,
+                                   supportedOTE->at(OteHuaweiKeygen::MAGIC_NUMBER - target)));
 
     keygens->append(new PBSKeygen(ssid, mac));
     keygens->append(new BelkinKeygen(ssid, mac));
     keygens->append(new PirelliKeygen(ssid, mac));
     keygens->append(new PtvKeygen(ssid, mac));
     keygens->append(new SitecomKeygen(ssid, mac));
-
-    if (ssid.toLower().count(QRegExp("^sitecom[0-9a-f]{6}$")) == 1 ||
-            (mac.startsWith("00:0C:F6") || mac.startsWith("64:D1:A3"))) {
-        QString filteredMac = mac.replace(":", "");
-        if (filteredMac.length() != 12) {
-            QString computedMac = "00:0C:F6" + ssid.right(6);
-            keygens->append(new SitecomWLR400xKeygen(ssid, computedMac));
-            keygens->append(new SitecomWLR2100Keygen(ssid, computedMac));
-            computedMac = "64:D1:A3" + ssid.right(6);
-            keygens->append(new SitecomWLR400xKeygen(ssid, computedMac));
-            keygens->append(new SitecomWLR2100Keygen(ssid, computedMac));
-        } else {
-            keygens->append(new SitecomWLR400xKeygen(ssid, mac));
-            keygens->append(new SitecomWLR2100Keygen(ssid, mac));
-        }
-    }
+    keygens->append(new SitecomWLR400xKeygen(ssid, mac));
+    keygens->append(new SitecomWLR2100Keygen(ssid, mac));
     keygens->append(new SkyV1Keygen(ssid, mac));
     keygens->append(new Speedport500Keygen(ssid, mac));
     keygens->append(new TecomKeygen(ssid, mac));
 
-    if (ssid.toLower().startsWith("teletu")) {
-        QString filteredMac = mac.replace(":", "");
-        if (filteredMac.length() != 12 &&
-            (ssid.count(QRegExp("^TeleTu_[0-9a-fA-F]{12}$")) == 1)){
-            mac = filteredMac = ssid.mid(7);
-        }
-        if (filteredMac.length() == 12) {
-            QVector<TeleTuMagicInfo *> *  supported = supportedTeletu
-                                                      ->value(filteredMac.left(6));
-            if (supported != NULL && supported->size() > 0) {
-                int macIntValue = filteredMac.mid(6).toInt(NULL,16);
-                for (int i = 0; i < supported->size(); ++i ) {
-                    if (macIntValue >= supported->at(i)->range[0]
-                        && macIntValue <= supported->at(i)->range[1]) {
-                        keygens->append(new TeleTuKeygen(ssid, mac,
-                                                supported->at(i)));
-                    }
+    if (filteredMac.length() != 12 &&
+        (ssid.count(QRegExp("^TeleTu_[0-9a-fA-F]{12}$")) == 1)){
+        mac = filteredMac = ssid.mid(7);
+    }
+    if (filteredMac.length() == 12) {
+        QVector<TeleTuMagicInfo *> *  supported = supportedTeletu
+                                                  ->value(filteredMac.left(6));
+        if (supported != NULL && supported->size() > 0) {
+            int macIntValue = filteredMac.mid(6).toInt(NULL,16);
+            for (int i = 0; i < supported->size(); ++i ) {
+                if (macIntValue >= supported->at(i)->range[0]
+                    && macIntValue <= supported->at(i)->range[1]) {
+                    keygens->append(new TeleTuKeygen(ssid, mac,
+                                            supported->at(i)));
                 }
             }
         }
