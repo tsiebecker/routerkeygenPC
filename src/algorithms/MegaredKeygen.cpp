@@ -9,6 +9,7 @@
 
 MegaredKeygen::MegaredKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "MegaredKeygen";
 }
 
 

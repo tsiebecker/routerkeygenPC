@@ -22,6 +22,7 @@
 AliceItalyKeygen::AliceItalyKeygen(QString ssid, QString mac,
 		QVector<AliceMagicInfo *> * supported) :
 		Keygen(ssid, mac), supportedAlice(supported) {
+		kgname = "AliceItalyKeygen";
 
 }
 

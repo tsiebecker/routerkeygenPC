@@ -9,6 +9,7 @@
 
 AxtelKeygen::AxtelKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "AxtelKeygen";
 }
 
 

@@ -9,6 +9,7 @@
 
 TplinkKeygen::TplinkKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "TplinkKeygen";
 }
 
 

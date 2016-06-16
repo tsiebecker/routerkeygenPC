@@ -9,6 +9,7 @@
 
 InterCableKeygen::InterCableKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "InterCableKeygen";
 }
 
 QVector<QString> & InterCableKeygen::getKeys() {

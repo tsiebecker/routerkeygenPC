@@ -21,6 +21,7 @@
 
 OnoKeygen::OnoKeygen(QString ssid, QString mac) :
         Keygen(ssid, mac) {
+        kgname = "OnoKeygen";
 }
 
 QVector<QString> & OnoKeygen::getKeys() {

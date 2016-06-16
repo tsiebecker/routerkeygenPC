@@ -22,6 +22,7 @@
 
 SitecomWLR2100Keygen::SitecomWLR2100Keygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "SitecomWLR2100Keygen";
 }
 const QString SitecomWLR2100Keygen::ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ";
 

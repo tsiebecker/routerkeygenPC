@@ -20,6 +20,7 @@
 
 PirelliKeygen::PirelliKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "PirelliKeygen";
 	this->hash = new QCryptographicHash(QCryptographicHash::Md5);
 	ssidIdentifier = ssid.right(12);
 }

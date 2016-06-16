@@ -21,6 +21,7 @@
 
 SkyV1Keygen::SkyV1Keygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "SkyV1Keygen";
 }
 const QString SkyV1Keygen::ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 

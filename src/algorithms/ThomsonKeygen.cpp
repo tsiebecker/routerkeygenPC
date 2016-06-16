@@ -102,6 +102,7 @@ private:
 
 ThomsonKeygen::ThomsonKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "ThomsonKeygen";
 }
 
 

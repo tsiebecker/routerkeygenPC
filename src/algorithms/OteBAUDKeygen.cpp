@@ -20,6 +20,7 @@
 
 OteBAUDKeygen::OteBAUDKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "OteBAUDKeygen";
 }
 
 

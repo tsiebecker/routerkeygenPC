@@ -21,7 +21,9 @@
 #include <QCryptographicHash>
 
 TeleTuKeygen::TeleTuKeygen(QString ssid, QString mac, TeleTuMagicInfo * m) :
-    Keygen(ssid, mac) , magicInfo(m){}
+    Keygen(ssid, mac) , magicInfo(m){
+    kgname = "TeleTuKeygen";
+}
 
 QVector<QString> & TeleTuKeygen::getKeys() {
     QString mac = getMacAddress();

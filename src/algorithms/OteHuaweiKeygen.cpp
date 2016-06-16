@@ -22,7 +22,7 @@
 OteHuaweiKeygen::OteHuaweiKeygen(QString ssid, QString mac,
         QString supported) :
         Keygen(ssid, mac), magicValues(supported) {
-
+        kgname = "OteHuaweiKeygen";
 }
 
 const int OteHuaweiKeygen::MAGIC_NUMBER = 65535;

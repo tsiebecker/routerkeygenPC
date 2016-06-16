@@ -9,6 +9,7 @@
 
 OteKeygen::OteKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "OteKeygen";
 }
 
 

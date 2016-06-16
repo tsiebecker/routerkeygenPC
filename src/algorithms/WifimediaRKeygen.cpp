@@ -9,6 +9,7 @@
 
 WifimediaRKeygen::WifimediaRKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+		kgname = "WifimediaRKeygen";
 }
 
 QVector<QString> & WifimediaRKeygen::getKeys() {

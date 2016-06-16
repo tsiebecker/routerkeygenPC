@@ -4,6 +4,7 @@
 AliceGermanyKeygen::AliceGermanyKeygen(QString ssid, QString mac) :
         Keygen(ssid, mac) {
     this->hash = new QCryptographicHash(QCryptographicHash::Md5);
+    kgname = "AliceGermanyKeygen";
 }
 AliceGermanyKeygen::~AliceGermanyKeygen(){
     delete hash;

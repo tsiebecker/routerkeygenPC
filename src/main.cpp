@@ -82,13 +82,14 @@ int main(int argc, char * argv[]) {
         for ( int i = 0; i < keygens->size(); ++i ){
             try{
                 QVector<QString> r = keygens->at(i)->getResults();
+                results.append("-=kg=:"+keygens->at(i)->kgname);
                 foreach (QString s, r) {
                     results.append(s);
                 }
             }catch (int e){
                 if ( !options.value("q", false).toBool() )
-                    std::cout << QObject::tr("Errors while calculating.").toUtf8().data() << std::endl;
-                return -3;
+                    qWarning("%s: Errors while calculating.", keygens->at(i)->kgname.toLatin1().data());
+                continue;
             }
         }
         if (results.isEmpty()) {
