@@ -83,7 +83,7 @@ int main(int argc, char * argv[]) {
             try{
                 QVector<QString> r = keygens->at(i)->getResults();
                 results.append("-=kg=:"+keygens->at(i)->kgname);
-                results.append(r);
+                results +=r;
             }catch (int e){
                 if ( !options.value("q", false).toBool() )
                     qWarning("%s: Errors while calculating.", keygens->at(i)->kgname.toLatin1().data());
