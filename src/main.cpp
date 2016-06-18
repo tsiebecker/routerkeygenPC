@@ -73,6 +73,7 @@ int main(int argc, char * argv[]) {
             for ( int i = 0; i < keygens->size(); ++i ){
                 try {
                     QVector<QString> r = keygens->at(i)->getResults();
+                    results.append("-=kg=:"+keygens->at(i)->kgname);
                     results +=r;
                 } catch (int e) {
                     if ( !options.value("q", false).toBool() )
