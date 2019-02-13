@@ -9,11 +9,13 @@
 #define QWIFIMANAGERPRIVATEUNIX_H_
 
 #include "QWifiManagerPrivate.h"
+#include "NetworkManager.h"
 
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
-#include <NetworkManager.h>
+
+
 
 class QWifiManagerPrivateUnix: public QWifiManagerPrivate {
 Q_OBJECT
